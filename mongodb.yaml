@@ -12,4 +12,10 @@
       name: mongodb-org
       state: present
 
+  - name: start and enable mongodb
+    ansible.builtin.service:
+      name: mongodb
+      state: started
+      enable: yes    
+
          
