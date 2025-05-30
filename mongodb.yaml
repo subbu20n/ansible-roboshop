@@ -8,7 +8,7 @@
       dest: /etc/yum.repo.d/mongo.repo
 
   - name: Installed mongodb server
-    ansible,builtin.dnf:
+    ansible.builtin.dnf:
       name: mongodb-org
       state: present
 
@@ -28,6 +28,6 @@
     ansible.builtin.service:
        name: mongod
        state: restarted
-             
+
                       
          
