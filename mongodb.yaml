@@ -18,4 +18,10 @@
       state: started
       enabled: yes    
 
+  - name: allow remote connections
+    ansible.builtin.replace:
+      path: /etc/mongod.configuring
+      regexp: '127.0.0.1'
+      replace: '0.0.0.0'
+      
          
