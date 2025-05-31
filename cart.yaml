@@ -29,7 +29,7 @@
       url: https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
       dest: /tmp/user.zip
 
-  - name: extarct cart code
+  - name: extract cart code
     ansible.builtin.unarchive: 
        src: /tmp/cart.zip
        dest: /app
