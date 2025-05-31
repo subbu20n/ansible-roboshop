@@ -20,7 +20,7 @@
      replace: '0.0.0.0'
 
   - name: disable protected module
-    ansible.builtin.lineinfiles:
+    ansible.builtin.lineinfile:
      path: /etc/redis/redis.conf 
      regexp: 'protected-mode'
      line: protected-mode nodejs
