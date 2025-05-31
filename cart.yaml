@@ -27,7 +27,7 @@
   - name: download user code
     ansible.builtin.get_url:
       url: https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip
-      dest: /tmp/user.zip
+      dest: /tmp/cart.zip
 
   - name: extract cart code
     ansible.builtin.unarchive: 
