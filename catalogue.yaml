@@ -13,7 +13,7 @@
       name: nodejs
       state: present
 
-  - name: create roboshop systemuser
+  - name: create roboshop system user
     ansible.builtin.user:
       name: roboshop
       shell: /sbin/nologin
