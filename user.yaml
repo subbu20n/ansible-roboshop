@@ -33,7 +33,7 @@
  # remote_src yes means this file already exist in user.zip
 
   - name: extract user code
-    ansible.builtin.archieve:
+    ansible.builtin.unarchive:
       src: /tmp/user.zip
       dest: /app
       remote_src: yes
