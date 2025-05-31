@@ -40,12 +40,12 @@
       dest: /usr/share/nginx/html
       remote_src: yes
 
-  - name: remove default nginx.conf
+  - name: remove default nginx conf
     ansible.builtin.file:
       path: /etc/nginx/nginx.conf
       dest: absent
 
-  - name: copy roboshop nginx.conf 
+  - name: copy roboshop nginx conf 
     ansible.builtin.copy:
       src: nginx.conf
       dest: /ect/nginx/nginx.conf 
