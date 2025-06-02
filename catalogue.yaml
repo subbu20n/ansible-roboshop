@@ -9,7 +9,7 @@
     ansible.builtin.command: dnf module enable nodejs:20 -y
 
   - name: install nodejs
-    ansible.builtin.dnf: 
+    ansible.builtin.dnf:
       name: nodejs
       state: installed
 
@@ -19,15 +19,15 @@
       shell: /sbin/nologin
       home: /app
 
-  - name: creating app directory
+  - name: create app directory
     ansible.builtin.file:
       path: /app
       state: directory
 
   - name: Downloading catalogue code
     ansible.builtin.get_url:
-      url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
-      dest: /tmp/catalogue.zip
+      url: https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip
+      dest: /tmp/catalogue.zip            
 
   - name: extract catalogue code
     ansible.builtin.unarchive:
@@ -37,42 +37,41 @@
 
   - name: install dependencies
     ansible.builtin.npm:
-       path: /app
+      path: /app
 
   - name: copy catalogue service
     ansible.builtin.copy:
-      src: catalogue.service
-      dest: /etc/systemd/system/catalogue.service
+       src: catalogue.service
+       dest: /ect/systemd/system/catalogue.service
 
   - name: daemon reload
     ansible.builtin.systemd_service:
-      daemon_reload: true
+       daemon_reload: true
 
   - name: start and enable catalogue
     ansible.builtin.service:
-       name: catalogue
-       state: started
-       enabled: yes
+      name: catalogue
+      state: started
+      enabled: yes
 
-  - name: copy mongdb repo
+  - name: copy mongodb repo
     ansible.builtin.copy:
-       src: mongo.repo
-       dest: /etc/yum.repos.d/mongo.repo
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
 
   - name: install mongodb client
     ansible.builtin.dnf:
-       name: mongodb-mongosh
-       state: installed
+      name: mongodb-mongosh
+      state: installed
 
-  - name: check products loaded or not
+  - name: check products loaded or not 
     ansible.builtin.command: mongosh --host mongodb.subbuaws.site --eval 'db.getMongo().getDBNames().indexOf("catalogue")'
     register: catalogue_output
 
   - name: print catalogue output 
     ansible.builtin.debug:
-     msg: "{{ catalogue_output }}" 
+      msg: "{{ catalogue_output }}" 
 
   - name: load products
-    ansible.builtin.shell: mongosh --host mongodb.subbuaws.site </app/db/master-data.js 
-    when: catalogue_output.stdout | int < 0
-
+    ansible.builtin.shell: mongosh --host mongodb.subbuaws.site </app/db/master-data.js  
+    when: catalogue_output.stdout | int < 0                                      
