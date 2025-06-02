@@ -18,11 +18,11 @@
        state: started
        enabled: yes
 
-  - name: creating rabbitmq user
+  - name: creat rabbitmq user
     community.rabbitmq.rabbitmq_user: 
        user: roboshop
        password: roboshop123
-       permissios:
+       permissions:
        - vhost: /
          configure_priv: .*
          read_priv: .*
