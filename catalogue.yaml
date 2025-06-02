@@ -30,7 +30,7 @@
       dest: /tmp/catalogue.zip
 
   - name: extract catalogue code
-    ansible..builtin.unarchive:
+    ansible.builtin.unarchive:
        src: /tmp/catalogue.zip
        dest: /app
        remote_src: yes
@@ -75,5 +75,4 @@
   - name: load products
     ansible.builtin.shell: mongosh --host mongodb.subbuaws.site </app/db/master-data.js 
     when: catalogue_output.stdout | int < 0
-    
-                                                         
+
