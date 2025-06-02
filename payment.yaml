@@ -24,7 +24,7 @@
 
   - name: Downloading payment code
     ansible.builtin.get_url:
-       url: 
+       url: https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip 
        dest: /tmp/payment.zip
 
   - name: extract payment code
