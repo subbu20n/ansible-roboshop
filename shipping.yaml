@@ -78,8 +78,8 @@
     - /app/db/app-user.sql
     - /app/db/master-data.sql
 
-    - name: restart shipping
-      ansible.builtin.service:
+  - name: restart shipping
+    ansible.builtin.service:
         name: shipping
         state: restart
 
