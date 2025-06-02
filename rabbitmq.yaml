@@ -20,11 +20,11 @@
 
   - name: creating rabbitmq user
     community.rabbitmq.rabbitmq_user: 
-       user: rabbitmq
+       user: roboshop
        password: roboahop123
        permissios:
        - vhost: /
          configure_priv: .*
          read_priv: .*
          write_priv: .*
-       state: present               
+       state: present                
