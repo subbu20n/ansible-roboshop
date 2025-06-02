@@ -2,35 +2,32 @@
   hosts: user
   become: yes
   tasks:
-  - name: disable default nodejs
-    ansible.builtin.command: dnf module disable nodejs -y
+  - name: disable nodejs
+    ansible.builtin.command: dnf module disable nodejs -y 
 
-  - name: enable nodejs:20 
-    ansible.builtin.command: dnf module enable nodejs:20 -y
+  - name: enable nodejs:20
+    ansible.builtin.command: dnf module enable nodejs:20 -y 
 
   - name: install nodejs
     ansible.builtin.dnf: 
       name: nodejs
-      state: present
+      state: installed
 
-  - name: create roboshop system user
-    ansible.builtin.user:
-      name: roboshop
+  - name: creating system user roboshop
+    ansible.builtin.user: 
+      user: roboshop
       shell: /sbin/nologin
       home: /app
 
-  - name: create app directory
+  - name: creating app directory
     ansible.builtin.file:
       path: /app
       state: directory
 
-  - name: download user code
+  - name: Downloading user code
     ansible.builtin.get_url:
-       url: https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip 
-       dest: /tmp/user.zip           
-
- # this module thinks files exists on ansible control server needta to extract on remote machine
- # remote_src yes means this file already exist in user.zip
+      url: 
+      dest: /tmp/user.zip
 
   - name: extract user code
     ansible.builtin.unarchive:
@@ -39,20 +36,21 @@
       remote_src: yes
 
   - name: install dependencies
-    community.general.npm:
-     path: /app
+    ansible.builtin.npm:
+      path: /app
 
-  - name: copy user service to system directory
+  - name: copy user service
     ansible.builtin.copy:
       src: user.service
       dest: /etc/systemd/system/user.service
 
-  - name: systemctl deamon reload
+  - name: daemon reload
     ansible.builtin.systemd_service:
-      daemon_reload: true
+      daemon_reload: yes
 
   - name: start and enable user
     ansible.builtin.service:
       name: user
       state: started
-      enabled: yes                        
+      enabled: yes
+          
