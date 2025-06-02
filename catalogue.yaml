@@ -65,7 +65,7 @@
        state: installed
 
   - name: check products loaded or not
-    ansible.builtin.command: mongosh --host mongodb.subbuaws.site 'db.getMongo().getDBNames().index of ("catalogue")'
+    ansible.builtin.command: mongosh --host mongodb.subbuaws.site 'db.getMongo().getDBNames().indexOf("catalogue")'
     register: catalogue_output
 
   - name: print catalogue output 
