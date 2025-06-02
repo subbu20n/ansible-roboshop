@@ -69,7 +69,7 @@
     community.mysql.mysql_db:
        name: allow
        login_user: root
-       login_password: roboahop123
+       login_password: RoboShop@1
        login_host: mysql.subbuaws.site 
        state: import
        target: "{{ item }}"
