@@ -9,7 +9,7 @@
 
   - name: install mongodb server
     ansible.builtin.dnf:
-      name: mongod-org
+      name: mongodb-org
       state: installed
 
   - name: start and enable mongodb
