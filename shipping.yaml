@@ -84,7 +84,7 @@
       tags:
       - import
       ansible.builtin.service:
-        name: shipping
         state: restarted 
+        name: shipping
 
                 
