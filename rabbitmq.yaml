@@ -19,12 +19,14 @@
       enabled: yes
 
   - name: creating rabbitmq user
+    tags:
+    - import
     community.rabbitmq.rabbitmq_user:
        user: rabbitmq
        password: roboshop123
        permissions:
-       - vhosts: /
+       - vhost: /
          configure_priv: .*
          read_priv: .*
          write_priv: .*
-       state: present  
+       state: present  v  
