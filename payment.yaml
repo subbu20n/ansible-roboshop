@@ -2,7 +2,7 @@
   hosts: payment
   become: yes
   tasks:
-  - name: install python3 packages
+  - name: installed python3 packages
     ansible.builtin.dnf:
       name: "{{ item }}"
       state: installed
@@ -24,8 +24,8 @@
 
   - name: Downloading payment code
     ansible.builtin.get_url:
-      url: https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip 
-      dest: /tmp/payment.zip
+       url: 
+       dest: /tmp/payment.zip
 
   - name: extract payment code
     ansible.builtin.unarchive:
@@ -37,20 +37,21 @@
     ansible.builtin.pip:
       requirements: requirements.txt
       executable: pip3.9
-    args:
+    args: 
       chdir: /app
 
   - name: copy payment service
     ansible.builtin.copy:
-      src: payment.service
-      dest: /etc/systemd/system/payment.service
-
-  - name: daemon reload
-    ansible.builtin.systemd_service:
-       daemon_reload: true
+       src: payment.service
+       dest: /etc/systemd/system/payment.service
 
   - name: start and enable payment
     ansible.builtin.service:
-      name: payment
-      state: started
-      enabled: yes                                    
+       name: payment
+       state: started
+       enabled: yes
+
+  - name: restart payment
+    ansible.builtin.service:
+       name: payment
+       state: restarted                                   
