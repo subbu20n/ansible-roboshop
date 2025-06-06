@@ -31,7 +31,7 @@
   - name: unzip frontend code
     ansible.builtin.unarchive: 
       src: /tmp/frontend.zip
-      dest: /us/share/nginx/html
+      dest: /usr/share/nginx/html
       remote_src: yes
 
   - name: remove default nginx.conf
