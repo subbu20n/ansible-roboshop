@@ -1,0 +1,50 @@
+- name: configure frontend component
+  hosts: frontend
+  become: yes
+  tasks: 
+  - name: disbale nginx
+    ansible.builtin.command: dnf module disable nginx -y 
+
+  - name: enable nginx:1.24
+    ansible.builtin.command: dnf module enable nginx:1.24 -y 
+
+  - name: install nginx
+    ansible.builtin.dnf:
+      name: nginx
+      state: installed
+
+  - name: remove html directory 
+    ansible.builtin.file:
+      path: /usr/share/nginx/html
+      state: absent
+
+  - name: create html directory 
+    ansible.builtin.file:
+       path: /usr/share/nginx/html 
+       state: directory
+
+  - name: Download frontend code 
+    ansible.builtin.get_url:
+      url: 
+      dest: /tmp/frontend.zip
+
+  - name: extract frontend code
+    ansible.builtin.unarchive: 
+      src: /tmp/frontend.zip
+      dest: /app
+      remote_src: yes
+
+  - name: remove default nginx.conf
+    ansible.builtin.file:
+      path: /etc/nginx/nginx.conf
+      state: absent
+
+  - name: copy nginx.conf 
+    ansible.builtin.copy: 
+      src: nginx.conf 
+      dest: /etc/nginx/nginx.conf 
+
+  - name: restart nginx 
+    ansible.builtin.service:
+      name: nginx 
+      state: restarted                       
