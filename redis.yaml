@@ -5,7 +5,7 @@
   - name: disable redis
     ansible.builtin.command: dnf module disable redis -y
 
-  - name: enable redis:7
+  - name: enable redis
     ansile.builtin.command:  dnf module enable  redis:7 -y
 
   - name: allow remote connections
