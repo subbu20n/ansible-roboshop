@@ -19,7 +19,7 @@
       state: started 
       enabled: yes 
 
-  - name: remove default nginx content 
+  - name: remove html directory 
     ansible.builtin.file:
       path: /usr/share/nginx/html
       state: absent 
