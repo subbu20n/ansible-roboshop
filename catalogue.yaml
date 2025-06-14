@@ -37,7 +37,7 @@
 
   - name: install depenencies 
     community.general.npm:
-      peth: /app 
+      path: /app 
 
   - name: copy catalogue service to systemd service 
     ansible.builtin.copy: 
