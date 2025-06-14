@@ -25,9 +25,9 @@
       state: absent 
 
   - name: create html directory 
-    ansible.buitlin.file:
-      name: /usr/share/nginx/html            
-      state: directory 
+    ansible.builtin.file: 
+       path: /usr/share/nginx/html
+       state: directory 
 
   - name: download frontend code 
     ansible.builtin.get_url:
