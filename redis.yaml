@@ -15,7 +15,7 @@
 
   - name: allow remote  connections 
     ansible.builtin.replace: 
-       peth: /etc/redis/redis.conf 
+       path: /etc/redis/redis.conf 
        regexp: '127.0.0.1'
        replace: '0.0.0.0'
 
