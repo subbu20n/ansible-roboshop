@@ -21,7 +21,7 @@
 
   - name: creating app directory 
     ansible.builtin.file: 
-      peth: /app
+      path: /app
       state: directory
 
   - name: downaload catalogue code
