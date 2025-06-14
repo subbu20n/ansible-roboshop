@@ -1,53 +1,56 @@
-- name: configure payment component 
+- name: configure payment compnent 
   hosts: payment 
   become: yes 
-  tasks: 
-  - name: "{{ item }}"
-    state: installed 
-  loop: 
-  - python3 
-  - gcc
-  - python3-devel   
+  tasks:
+  - name: install python3 packages 
+    ansible.builtin.dnf:
+      name: "{{ item }}"
+      state: installed 
+    loop:
+    - python3
+    - gcc
+    - python3-devel
 
-  - name: creating roboshop system user 
-    ansible.builtin.user:
-       name: roboshop
-       shell: /sbin/nologin
-       home: /app 
-
-  - name: creating app directory 
+  - name: create app directory 
     ansible.builtin.file:
       path: /app
+      state: directory 
 
-  - name: Downloading payment code 
+  - name: create system user roboshop
+    ansible.builtin.user:
+       user: roboshop
+       shell: /sbin/nologin
+       home: /app
+
+  - name: download payment code
     ansible.builtin.get_url:
-       url: 
-       dest: /tmp/payment.zip 
+      url: https://roboshop-artifacts.s3.amazonaws.com/payment-v3.zip 
+      dest: /tmp/payment.zip 
 
-  - name: extract payment code 
+  - name: unzip payment.zip
     ansible.builtin.unarchive:
-      src: /tmp/payment.zip 
-      dest: /app 
+      src: /tmp/payment.zip
+      dest: /app
       remote_src: yes 
 
   - name: install dependencies 
     ansible.builtin.pip:
-      requirements: requirements.txt 
-      executable: pip3.9 
+      requirements: requirements.txt
+      executable: pip3.9
     args: 
-      chdir: /app 
+     chdir: /app
 
   - name: copy payment service 
     ansible.builtin.copy:
-      src: /tmp/payment.zip 
-      dest: /app
+      src: payment.service 
+      dest: /etc/sysytemd/system/payment.srvice 
 
-  - name: systemctl daemon reload 
+  - name: daemon reload 
     ansible.builtin.systemd_service:
       daemon_reload: true 
 
   - name: start and enable payment 
-    ansible.builtn.service: 
-      name: payment 
-      state: started
-      enabled: yes                                  
+    ansible.builtin.service:
+       name: payment
+       state: started 
+       enabled: yes                                   
