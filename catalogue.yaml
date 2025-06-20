@@ -76,4 +76,4 @@
   - name: load products 
     ansible.builtin.shell: mongosh --host mongodb.subbuaws.site </app/db/master-data.js    
 
-    when: catalogue_output.stout | int <0                                                          
+    when: catalogue_output.stdout | int <0                                                          
