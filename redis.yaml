@@ -25,7 +25,7 @@
      regexp: 'protected-mode'
      line: protected-mode no 
 
-  - name: enable and start redis  
+  - name: start and enable redis 
     ansibe.builtin.service: 
       name: redis 
       state: started 
