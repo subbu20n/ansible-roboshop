@@ -17,21 +17,21 @@
     ansible.builtin.user: 
       name: roboshop
       shell: /sbin/nologin
-      home: /app
+      home: /app 
 
   - name: create app directory 
     ansible.builtin.file:
-      path: /app
+      path: /app 
       state: directory 
 
   - name: Download user code
     ansible.builtin.get_url:
        url: https://roboshop-artifacts.s3.amazonaws.com/user-v3.zip 
        dest: /tmp/user.zip
-
+ 
   - name: extract user code
     ansible.builtin.unarchive:
-      src: /tmp/user.zip
+      src: /tmp/user.zip 
       dest: /app
       remote_src: yes
 
@@ -44,7 +44,7 @@
        src: user.service
        dest: /etc/systemd/system/user.service
 
-  - name: systemctl daemon reload
+  - name: systemctl daemon reload 
     ansible.builtin.systemd_service:
       daemon_reload: true
 

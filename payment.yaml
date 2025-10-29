@@ -34,7 +34,7 @@
       remote_src: yes 
 
   - name: install dependencies 
-    ansible.builtin.pip:
+    ansible.builtin.pip: 
       requirements: requirements.txt
       executable: pip3.9
     args: 

@@ -18,5 +18,5 @@ ExecStart=/usr/local/bin/uwsgi --ini payment.ini
 ExecStop=/bin/kill -9 $MAINPID
 SyslogIdentifier=payment
 
-[Install]
+[Install]  
 WantedBy=multi-user.target
