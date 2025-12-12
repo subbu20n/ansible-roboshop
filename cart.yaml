@@ -17,7 +17,7 @@
     ansible.builtin.user: 
       name: roboshop
       shell: /sbin/nologin
-      home: /app
+      home: /app 
 
   - name: create app directory 
     ansible.builtin.file:
@@ -25,14 +25,14 @@
 
   - name: Download cart code
     ansible.builtin.get_url:
-       url: https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip 
+       url: https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip  
        dest: /tmp/cart.zip
 
   - name: extract cart code
-    ansible.builtin.unarchive:
+    ansible.builtin.unarchive: 
       src: /tmp/cart.zip
-      dest: /app
-      remote_src: yes
+      dest: /app 
+      remote_src: yes 
 
   - name: insatll dependencies
     community.general.npm:
@@ -50,6 +50,6 @@
   - name: start and enable cart 
     ansible.builtin.service:
       name: cart 
-      state: started
+      state: started 
       enabled: yes
       
