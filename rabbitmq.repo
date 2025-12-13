@@ -19,7 +19,7 @@ name=modern-erlang-el9-source
 baseurl=https://yum1.novemberain.com/erlang/el/9/SRPMS
         https://yum2.novemberain.com/erlang/el/9/SRPMS
         https://dl.cloudsmith.io/public/rabbitmq/rabbitmq-erlang/rpm/el/9/SRPMS
-enabled=1
+enabled=1 
 gpgcheck=0 
 
 [rabbitmq-el9]
