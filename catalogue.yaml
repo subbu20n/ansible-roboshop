@@ -22,7 +22,7 @@
 
   - name: creating app directory 
     ansible.builtin.file: 
-       path: /app
+       path: /app 
        state: directory 
 
   - name: download the catalogue code 
@@ -60,7 +60,7 @@
        src: mongo.repo 
        dest: /etc/yum.repos.d/mongo.repo 
 
-  - name: install mondb client 
+  - name: install mongodb client 
     ansible.builtin.dnf: 
        name: mongodb-mongosh 
        state: present 
@@ -72,7 +72,7 @@
   - name: print catalogue output 
     ansible.builtin.debug: 
       msg: "{{ catalogue_output }}" 
-
+ 
   - name: load products 
     ansible.builtin.shell: mongosh --host mongodb.subbuaws.site </app/db/master-data.js  
 

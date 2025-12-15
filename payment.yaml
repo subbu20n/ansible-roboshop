@@ -20,7 +20,7 @@
     ansible.builtin.user:
        user: roboshop 
        shell: /sbin/nologin
-       home: /app
+       home: /app 
 
   - name: download payment code
     ansible.builtin.get_url:
