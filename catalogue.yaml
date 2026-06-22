@@ -11,7 +11,7 @@
   - name: Install nodejs 
     ansible.builtin.dnf: 
        name: nodejs 
-       state: installed 
+       state: installed   
 
   - name: creating system user roboshop 
     ansible.builtin.user: 
